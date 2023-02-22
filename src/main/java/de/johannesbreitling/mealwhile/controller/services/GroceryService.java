@@ -5,10 +5,12 @@ import de.johannesbreitling.mealwhile.model.Grocery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GroceryService {
 
-    private GroceryRepository groceryRepository;
+    private final GroceryRepository groceryRepository;
 
     @Autowired
     public GroceryService(GroceryRepository groceryRepository) {
@@ -17,6 +19,18 @@ public class GroceryService {
 
     public void saveGrocery(Grocery grocery) {
         this.groceryRepository.save(grocery);
+    }
+
+    public List<Grocery> getGroceries() {
+        return groceryRepository.findAll();
+    }
+
+    public Grocery getGroceryByName(String name) {
+        return groceryRepository.findByName(name);
+    }
+
+    public Grocery getGroceryById(String id) {
+        return groceryRepository.findByName(id);
     }
 
 }
