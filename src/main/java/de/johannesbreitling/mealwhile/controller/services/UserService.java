@@ -31,10 +31,16 @@ public class UserService {
         user.setName(newUser.getName());
         user.setCategory(newUser.getCategory());
         user.setPasswordHash(newUser.getPasswordHash());
+
+        userRepository.save(user);
     }
 
     public void deleteUser(User user) {
         userRepository.delete(user);
+    }
+
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
     public User getUserByName(String name) {

@@ -68,6 +68,11 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<User>> getUsers() {
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
+    }
+
     @PostMapping("/categories/")
     public ResponseEntity createUserCategory(@RequestBody UserCategoryRequest category) {
 
