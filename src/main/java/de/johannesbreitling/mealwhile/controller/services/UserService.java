@@ -5,6 +5,7 @@ import de.johannesbreitling.mealwhile.controller.repositories.UserRepository;
 import de.johannesbreitling.mealwhile.model.User;
 import de.johannesbreitling.mealwhile.model.UserCategory;
 import de.johannesbreitling.mealwhile.model.requests.UserCategoryRequest;
+import de.johannesbreitling.mealwhile.model.requests.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,12 @@ public class UserService {
 
     public void saveUser(User user) {
         userRepository.save(user);
+    }
+
+    public void updateUser(User user, User newUser) {
+        user.setName(newUser.getName());
+        user.setCategory(newUser.getCategory());
+        user.setPasswordHash(newUser.getPasswordHash());
     }
 
     public void deleteUser(User user) {

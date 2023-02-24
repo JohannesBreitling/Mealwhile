@@ -1,10 +1,14 @@
 package de.johannesbreitling.mealwhile.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@Getter
+@Setter
 @RequiredArgsConstructor
 @Table(name = "users")
 public class User {

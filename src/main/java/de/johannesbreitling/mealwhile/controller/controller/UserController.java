@@ -29,15 +29,36 @@ public class UserController {
     @PostMapping("/")
     public ResponseEntity createUser(@RequestBody UserRequest user) {
 
-        User newUser = new User(user.name(), user.password(), user.category());
+        UserCategory category = userService.getUserCategoryById(user.categoryId());
 
+        if (category == null) {
+            throw new EntityNotFoundException();
+        }
+
+        User newUser = new User(user.name(), user.password(), category);
         System.out.println(newUser);
+        userService.saveUser(newUser);
 
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @DeleteMapping("/")
-    public ResponseEntity deleteUser(@RequestBody String id) {
+    @PatchMapping("/{id}")
+    public ResponseEntity updateUser(@PathVariable String id,
+                                     @RequestBody UserRequest user) {
+        User foundUser = userService.getUserById(id);
+        UserCategory foundCategory = userService.getUserCategoryById(user.categoryId());
+        if (foundUser == null || foundCategory == null) {
+            throw new EntityNotFoundException();
+        }
+
+        User newUser = new User(user.name(), user.password(), foundCategory);
+
+        userService.updateUser(foundUser, newUser);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable String id) {
         User user = userService.getUserById(id);
 
         if (user != null) {
