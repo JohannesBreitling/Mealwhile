@@ -4,6 +4,7 @@ import de.johannesbreitling.mealwhile.controller.repositories.UserCategoryReposi
 import de.johannesbreitling.mealwhile.controller.repositories.UserRepository;
 import de.johannesbreitling.mealwhile.model.User;
 import de.johannesbreitling.mealwhile.model.UserCategory;
+import de.johannesbreitling.mealwhile.model.requests.UserCategoryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,13 @@ public class UserService {
 
     public void deleteUserCategory(UserCategory category) {
         userCategoryRepository.delete(category);
+    }
+
+    public void updateUserCategory(UserCategory category, UserCategoryRequest newCategory) {
+        category.setColor(newCategory.color());
+        category.setName(newCategory.name());
+
+        userCategoryRepository.save(category);
     }
 
     public List<UserCategory> getUserCategories() {

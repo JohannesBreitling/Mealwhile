@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @RequiredArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id

@@ -1,6 +1,7 @@
 package de.johannesbreitling.mealwhile.controller.controller;
 
 import de.johannesbreitling.mealwhile.controller.exceptions.EntityAlreadyExistsException;
+import de.johannesbreitling.mealwhile.controller.exceptions.EntityNotFoundException;
 import de.johannesbreitling.mealwhile.controller.services.UserService;
 import de.johannesbreitling.mealwhile.model.User;
 import de.johannesbreitling.mealwhile.model.UserCategory;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@SuppressWarnings("rawtypes")
 @RequestMapping("/users")
 public class UserController {
 
@@ -25,7 +27,6 @@ public class UserController {
     }
 
     @PostMapping("/")
-    @SuppressWarnings("rawtypes")
     public ResponseEntity createUser(@RequestBody UserRequest user) {
 
         User newUser = new User(user.name(), user.password(), user.category());
@@ -35,8 +36,18 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @DeleteMapping("/")
+    public ResponseEntity deleteUser(@RequestBody String id) {
+        User user = userService.getUserById(id);
+
+        if (user != null) {
+            userService.deleteUser(user);
+        }
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
     @PostMapping("/categories/")
-    @SuppressWarnings("rawtypes")
     public ResponseEntity createUserCategory(@RequestBody UserCategoryRequest category) {
 
         if (userService.getUserCategoryByName(category.name()) != null) {
@@ -47,6 +58,32 @@ public class UserController {
         // Create new category and save to repository
         UserCategory newCategory = new UserCategory(category.name(), category.color());
         userService.saveUserCategory(newCategory);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PatchMapping("/categories/{id}")
+    public ResponseEntity updateUserCategory(@PathVariable String id,
+                                             @RequestBody UserCategoryRequest category) {
+        UserCategory foundCategory = userService.getUserCategoryById(id);
+
+        if (foundCategory == null) {
+            throw new EntityNotFoundException();
+        }
+
+        userService.updateUserCategory(foundCategory, category);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/categories/{id}")
+    public ResponseEntity deleteUserCategory(@PathVariable String id) {
+        UserCategory category = userService.getUserCategoryById(id);
+
+        if (category != null) {
+            userService.deleteUserCategory(category);
+        }
 
         return new ResponseEntity(HttpStatus.OK);
     }

@@ -3,11 +3,13 @@ package de.johannesbreitling.mealwhile.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "user_categories")
 @Getter
+@Setter
 @NoArgsConstructor
 public class UserCategory {
 
