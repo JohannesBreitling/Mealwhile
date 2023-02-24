@@ -1,9 +1,11 @@
 package de.johannesbreitling.mealwhile.model;
 
 import jakarta.persistence.*;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
+@RequiredArgsConstructor
 public class User {
 
     @Id
@@ -14,9 +16,20 @@ public class User {
     @Column(unique = true)
     private String name;
 
-    private String password;
+    private String passwordHash;
 
-    @Embedded
+    @ManyToOne
     private UserCategory category;
+
+    public User(String name, String passwordHash, UserCategory category) {
+        this.name = name;
+        this.passwordHash = passwordHash;
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "User < " + name + " : " + category + " >";
+    }
 
 }

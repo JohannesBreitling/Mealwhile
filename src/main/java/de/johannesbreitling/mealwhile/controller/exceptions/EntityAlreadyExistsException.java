@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Grocery already exists")
-public class GroceryAlreadyExistsException extends RuntimeException {
+public class EntityAlreadyExistsException extends RuntimeException {
 
-    public GroceryAlreadyExistsException() {
+    public EntityAlreadyExistsException() {
         super();
     }
 

@@ -1,10 +1,14 @@
 package de.johannesbreitling.mealwhile.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Embeddable
+@Table(name = "user_categories")
+@Getter
+@NoArgsConstructor
 public class UserCategory {
 
     @Id
@@ -17,4 +21,13 @@ public class UserCategory {
 
     private String color;
 
+    public UserCategory(String name, String color) {
+        this.name = name;
+        this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return "UserCategory < " + name + " >";
+    }
 }

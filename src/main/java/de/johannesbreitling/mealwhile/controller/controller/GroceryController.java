@@ -1,6 +1,6 @@
 package de.johannesbreitling.mealwhile.controller.controller;
 
-import de.johannesbreitling.mealwhile.controller.exceptions.GroceryAlreadyExistsException;
+import de.johannesbreitling.mealwhile.controller.exceptions.EntityAlreadyExistsException;
 import de.johannesbreitling.mealwhile.controller.exceptions.IllegalGroceryFlagException;
 import de.johannesbreitling.mealwhile.controller.services.GroceryService;
 import de.johannesbreitling.mealwhile.controller.utils.converter.GroceryConverter;
@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -36,7 +34,7 @@ public class GroceryController {
             Grocery existingGrocery = groceryService.getGroceryByName(request.name());
 
             if (existingGrocery != null) {
-                throw new GroceryAlreadyExistsException();
+                throw new EntityAlreadyExistsException();
             }
 
             flags = GroceryConverter.convertFlagsFromArray(request.flags());
