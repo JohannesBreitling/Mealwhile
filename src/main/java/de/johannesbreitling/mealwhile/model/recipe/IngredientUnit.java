@@ -1,4 +1,4 @@
-package de.johannesbreitling.mealwhile.model;
+package de.johannesbreitling.mealwhile.model.recipe;
 
 public enum IngredientUnit {
 

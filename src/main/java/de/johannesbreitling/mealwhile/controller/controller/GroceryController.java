@@ -4,8 +4,8 @@ import de.johannesbreitling.mealwhile.controller.exceptions.EntityAlreadyExistsE
 import de.johannesbreitling.mealwhile.controller.exceptions.IllegalGroceryFlagException;
 import de.johannesbreitling.mealwhile.controller.services.GroceryService;
 import de.johannesbreitling.mealwhile.controller.utils.converter.GroceryConverter;
-import de.johannesbreitling.mealwhile.model.Grocery;
-import de.johannesbreitling.mealwhile.model.GroceryFlag;
+import de.johannesbreitling.mealwhile.model.grocery.Grocery;
+import de.johannesbreitling.mealwhile.model.grocery.GroceryFlag;
 import de.johannesbreitling.mealwhile.model.requests.GroceryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

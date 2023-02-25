@@ -1,11 +1,8 @@
 package de.johannesbreitling.mealwhile.controller.utils.converter;
 
-import de.johannesbreitling.mealwhile.controller.exceptions.IllegalGroceryFlagException;
-import de.johannesbreitling.mealwhile.model.Grocery;
-import de.johannesbreitling.mealwhile.model.GroceryFlag;
+import de.johannesbreitling.mealwhile.model.grocery.GroceryFlag;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GroceryConverter {

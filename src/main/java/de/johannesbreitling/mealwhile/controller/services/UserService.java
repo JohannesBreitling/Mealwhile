@@ -2,10 +2,9 @@ package de.johannesbreitling.mealwhile.controller.services;
 
 import de.johannesbreitling.mealwhile.controller.repositories.UserCategoryRepository;
 import de.johannesbreitling.mealwhile.controller.repositories.UserRepository;
-import de.johannesbreitling.mealwhile.model.User;
-import de.johannesbreitling.mealwhile.model.UserCategory;
+import de.johannesbreitling.mealwhile.model.user.User;
+import de.johannesbreitling.mealwhile.model.user.UserCategory;
 import de.johannesbreitling.mealwhile.model.requests.UserCategoryRequest;
-import de.johannesbreitling.mealwhile.model.requests.UserRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

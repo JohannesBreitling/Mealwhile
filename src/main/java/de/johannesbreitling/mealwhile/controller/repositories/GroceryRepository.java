@@ -1,6 +1,6 @@
 package de.johannesbreitling.mealwhile.controller.repositories;
 
-import de.johannesbreitling.mealwhile.model.Grocery;
+import de.johannesbreitling.mealwhile.model.grocery.Grocery;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

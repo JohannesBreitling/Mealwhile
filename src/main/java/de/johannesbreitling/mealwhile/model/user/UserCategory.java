@@ -1,4 +1,4 @@
-package de.johannesbreitling.mealwhile.model;
+package de.johannesbreitling.mealwhile.model.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;

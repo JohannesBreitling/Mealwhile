@@ -1,4 +1,4 @@
-package de.johannesbreitling.mealwhile.model;
+package de.johannesbreitling.mealwhile.model.grocery;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,11 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
+import java.util.Objects;
 
-@Entity
 @Table(name = "groceries")
 @Getter
 @RequiredArgsConstructor
+@Entity
 public class Grocery {
 
     public Grocery(String name, List<GroceryFlag> flags) {
@@ -28,5 +29,13 @@ public class Grocery {
 
     @ElementCollection
     private List<GroceryFlag> flags;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grocery grocery = (Grocery) o;
+        return Objects.equals(name, grocery.name);
+    }
 
 }

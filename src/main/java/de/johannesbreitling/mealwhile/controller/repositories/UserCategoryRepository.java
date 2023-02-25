@@ -1,6 +1,6 @@
 package de.johannesbreitling.mealwhile.controller.repositories;
 
-import de.johannesbreitling.mealwhile.model.UserCategory;
+import de.johannesbreitling.mealwhile.model.user.UserCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserCategoryRepository extends JpaRepository<UserCategory, Long> {
