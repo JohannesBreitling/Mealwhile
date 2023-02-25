@@ -56,7 +56,48 @@ public class RecipeController {
 
         Recipe newRecipe = new Recipe(recipe.name(), recipe.notes(), recipe.instructions(), category);
 
+        recipeService.saveRecipe(newRecipe);
+
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity updateRecipe(@PathVariable String id, @RequestBody RecipeRequest recipe) {
+
+        UserCategory category = userService.getUserCategoryById(recipe.userCategoryId());
+        Recipe foundRecipe = recipeService.getRecipeById(id);
+
+        if (category == null || foundRecipe == null) {
+            throw new EntityNotFoundException();
+        }
+
+        Recipe newRecipe = new Recipe(recipe.name(), recipe.notes(), recipe.instructions(), category);
+        recipeService.updateRecipe(foundRecipe, newRecipe);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity updateRecipe(@PathVariable String id) {
+
+        Recipe recipe = recipeService.getRecipeById(id);
+
+        if (recipe != null) {
+            recipeService.deleteRecipe(recipe);
+        }
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/ingredient")
+    public ResponseEntity addIngredient() {
+
+
+
+
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
 
 }

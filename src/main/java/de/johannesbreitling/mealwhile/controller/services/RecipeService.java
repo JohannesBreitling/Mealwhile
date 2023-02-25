@@ -26,4 +26,21 @@ public class RecipeService {
         return recipeRepository.findByUserCategory(category);
     }
 
+    public Recipe getRecipeById(String id) {
+        return recipeRepository.findById(id);
+    }
+
+    public void updateRecipe(Recipe oldRecipe, Recipe newRecipe) {
+        oldRecipe.setName(newRecipe.getName());
+        oldRecipe.setNotes(newRecipe.getNotes());
+        oldRecipe.setInstructions(newRecipe.getInstructions());
+        oldRecipe.setUserCategory(newRecipe.getUserCategory());
+
+        recipeRepository.save(oldRecipe);
+    }
+
+    public void deleteRecipe(Recipe recipe) {
+        recipeRepository.delete(recipe);
+    }
+
 }

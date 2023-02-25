@@ -3,13 +3,18 @@ package de.johannesbreitling.mealwhile.model.recipe;
 import de.johannesbreitling.mealwhile.model.grocery.Grocery;
 import de.johannesbreitling.mealwhile.model.user.UserCategory;
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "recipes")
+@Getter
+@Setter
 @NoArgsConstructor
 public class Recipe {
 
