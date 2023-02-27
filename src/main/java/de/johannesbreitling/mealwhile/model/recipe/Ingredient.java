@@ -24,4 +24,10 @@ public class Ingredient {
     private float quantity;
     private IngredientUnit unit;
 
+    public Ingredient(Grocery grocery, float quantity, IngredientUnit unit) {
+        this.grocery = grocery;
+        this.quantity = quantity;
+        this.unit = unit;
+    }
+
 }

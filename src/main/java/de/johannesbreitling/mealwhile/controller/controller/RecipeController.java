@@ -1,11 +1,19 @@
 package de.johannesbreitling.mealwhile.controller.controller;
 
 import de.johannesbreitling.mealwhile.controller.exceptions.EntityNotFoundException;
+import de.johannesbreitling.mealwhile.controller.exceptions.IllegalUnitException;
+import de.johannesbreitling.mealwhile.controller.exceptions.IngredientAlreadyContainedException;
 import de.johannesbreitling.mealwhile.controller.services.GroceryService;
 import de.johannesbreitling.mealwhile.controller.services.RecipeService;
 import de.johannesbreitling.mealwhile.controller.services.UserService;
+import de.johannesbreitling.mealwhile.controller.utils.converter.IngredientConverter;
+import de.johannesbreitling.mealwhile.model.grocery.Grocery;
+import de.johannesbreitling.mealwhile.model.recipe.Ingredient;
+import de.johannesbreitling.mealwhile.model.recipe.IngredientUnit;
 import de.johannesbreitling.mealwhile.model.recipe.Recipe;
+import de.johannesbreitling.mealwhile.model.requests.IngredientRequest;
 import de.johannesbreitling.mealwhile.model.requests.RecipeRequest;
+import de.johannesbreitling.mealwhile.model.requests.RemoveIngredientRequest;
 import de.johannesbreitling.mealwhile.model.user.UserCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -89,12 +97,47 @@ public class RecipeController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PostMapping("/ingredient")
-    public ResponseEntity addIngredient() {
+    @PostMapping("/ingredient/add/{recipeId}")
+    public ResponseEntity addIngredient(@PathVariable String recipeId, @RequestBody IngredientRequest ingredient) {
 
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        Grocery grocery = groceryService.getGroceryById(ingredient.groceryId());
+        System.out.println(ingredient.groceryId());
+        System.out.println(grocery);
+        if (recipe == null || grocery == null) {
+            throw new EntityNotFoundException();
+        }
 
+        if (recipe.containsGrocery(grocery)) {
+            throw new IngredientAlreadyContainedException();
+        }
 
+        try {
+            IngredientUnit unit = IngredientConverter.convertUnitFromString(ingredient.unit());
+            Ingredient newIngredient = new Ingredient(grocery, ingredient.quantity(), unit);
+            recipeService.saveIngredient(newIngredient);
+            recipe.addIngredient(newIngredient);
+            recipeService.saveRecipe(recipe);
 
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalUnitException();
+        }
+
+    }
+
+    @PostMapping("ingredient/remove/{recipeId}")
+    public ResponseEntity removeIngredient(@PathVariable String recipeId, @RequestBody RemoveIngredientRequest ingredient) {
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        Ingredient foundIngredient = recipeService.getIngredientById(ingredient.id());
+
+        if (recipe == null || foundIngredient == null) {
+            throw new EntityNotFoundException();
+        }
+
+        recipe.removeGrocery(foundIngredient.getGrocery());
+        recipeService.saveRecipe(recipe);
+        recipeService.deleteIngredient(foundIngredient);
 
         return new ResponseEntity(HttpStatus.OK);
     }

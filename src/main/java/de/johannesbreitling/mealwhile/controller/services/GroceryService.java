@@ -2,6 +2,7 @@ package de.johannesbreitling.mealwhile.controller.services;
 
 import de.johannesbreitling.mealwhile.controller.repositories.GroceryRepository;
 import de.johannesbreitling.mealwhile.model.grocery.Grocery;
+import de.johannesbreitling.mealwhile.model.recipe.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class GroceryService {
     }
 
     public Grocery getGroceryById(String id) {
-        return groceryRepository.findByName(id);
+        return groceryRepository.findById(id);
     }
 
 }

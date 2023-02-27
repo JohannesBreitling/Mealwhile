@@ -1,11 +1,21 @@
 package de.johannesbreitling.mealwhile.model.grocery;
 
 public enum GroceryFlag {
-
-    VEGAN,
+    // Contains meat
     MEAT,
-    GLUTEN,
+    PORK,
+    BEEF,
+    POULTRY,
+
+    // Contains other animal products
+    EGG,
     LACTOSE,
-    NUT
+    HONEY,
+    GELATIN,
+
+    // Other allergic products
+    GLUTEN,
+    NUT,
+    KIWI
 
 }
