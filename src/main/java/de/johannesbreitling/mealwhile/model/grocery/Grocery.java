@@ -3,6 +3,7 @@ package de.johannesbreitling.mealwhile.model.grocery;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 @Table(name = "groceries")
 @Getter
+@Setter
 @RequiredArgsConstructor
 @Entity
 public class Grocery {

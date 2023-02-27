@@ -34,4 +34,8 @@ public class GroceryService {
         return groceryRepository.findById(id);
     }
 
+    public void deleteGrocery(Grocery grocery) {
+        groceryRepository.delete(grocery);
+    }
+
 }
